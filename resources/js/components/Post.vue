@@ -30,8 +30,6 @@ export default {
     components: {
         Comments,
     },
-    mounted() {
-        console.log("Component mounted.");
-    },
+    mounted() {},
 };
 </script>

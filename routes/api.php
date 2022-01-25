@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Comment;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,10 +16,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('comments', function (Request $request) {
     return Comment::all();
 });
+
+/* Route::get('replies', function (Request $request) {
+    return Reply::all();
+}); */
