@@ -11,16 +11,10 @@ class CommentController extends Controller
     {
         $data = array();
         $data['comment'] = $request->body;
-        $data['parent_id'] = 1;
-        $data['commentable_id'] = 1;
-        $data['commentable_type'] = 'type';
+        $data['name'] = $request->name;
 
         Comment::create($data);
 
         return ('thank you');
-    }
-
-    public function replyStore(Request $request)
-    {
     }
 }

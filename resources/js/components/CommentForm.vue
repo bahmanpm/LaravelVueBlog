@@ -3,10 +3,10 @@
         <form action="" @submit.prevent="createComment()">
             <div class="mb-3">
                 <input
-                    name="title"
-                    type="email"
+                    name="name"
+                    type="text"
+                    v-model="comment.name"
                     class="form-control"
-                    id="exampleFormControlInput1"
                     placeholder="Name"
                 />
             </div>
@@ -17,7 +17,6 @@
                     v-model="comment.body"
                     class="form-control"
                     placeholder="What is your view ..."
-                    id="exampleFormControlTextarea1"
                     rows="3"
                 ></textarea>
             </div>
@@ -38,6 +37,7 @@ export default {
             comments: [],
             comment: {
                 body: "",
+                name: "",
             },
         };
     },

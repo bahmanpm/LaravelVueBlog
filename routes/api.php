@@ -18,8 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('comments', function (Request $request) {
     return Comment::all();
-});
-
-/* Route::get('replies', function (Request $request) {
-    return Reply::all();
-}); */
+})->name('comments');

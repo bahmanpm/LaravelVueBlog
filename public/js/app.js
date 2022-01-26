@@ -6037,6 +6037,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _CommentForm__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CommentForm */ "./resources/js/components/CommentForm.vue");
 //
 //
 //
@@ -6059,16 +6060,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    CommentForm: _CommentForm__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   props: {
-    comments: Array,
-    replies: Array
+    comments: Array
   },
   mounted: function mounted() {}
 });
@@ -6117,14 +6115,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       edit: false,
       comments: [],
       comment: {
-        body: ""
+        body: "",
+        name: ""
       }
     };
   },
@@ -6180,8 +6178,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
   },
   data: function data() {
     return {
-      comments: [],
-      replies: []
+      comments: []
     };
   },
   methods: {
@@ -6193,40 +6190,17 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                console.log("get comments ======= >>>>>>>> ");
-
                 _this.$http.get("http://127.0.0.1:8001/api/comments").then(function (response) {
                   console.log(response);
                   this.comments = response.body;
                 });
 
-              case 2:
+              case 1:
               case "end":
                 return _context.stop();
             }
           }
         }, _callee);
-      }))();
-    },
-    getReplies: function getReplies() {
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee2() {
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                _this2.$http.get("http://127.0.0.1:8001/api/comments").then(function (response) {
-                  console.log(response);
-                  this.replies = response.body;
-                });
-
-              case 1:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2);
       }))();
     }
   },
@@ -6249,6 +6223,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var _Comments__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Comments */ "./resources/js/components/Comments.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -29018,9 +28998,7 @@ var render = function () {
     _vm._l(_vm.comments, function (comment) {
       return _c("div", { key: comment.id, staticClass: "card mb-3" }, [
         _c("div", { staticClass: "row no-gutters" }, [
-          _c("div", { staticClass: "col-md-1" }),
-          _vm._v(" "),
-          _c("div", { staticClass: "col-md-11" }, [
+          _c("div", { staticClass: "col-md-12" }, [
             _c("div", { staticClass: "card-body" }, [
               _c("h5", { staticClass: "card-title" }, [
                 _vm._v(_vm._s(comment.name)),
@@ -29039,8 +29017,6 @@ var render = function () {
                     "\n                    "
                 ),
               ]),
-              _vm._v(" "),
-              _vm._m(0, true),
             ]),
           ]),
         ]),
@@ -29049,18 +29025,7 @@ var render = function () {
     0
   )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-1 offset-md-11" }, [
-      _c("a", { staticClass: "btn btn-primary", attrs: { href: "#" } }, [
-        _vm._v("Reply"),
-      ]),
-    ])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -29096,7 +29061,29 @@ var render = function () {
         },
       },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "mb-3" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.comment.name,
+                expression: "comment.name",
+              },
+            ],
+            staticClass: "form-control",
+            attrs: { name: "name", type: "text", placeholder: "Name" },
+            domProps: { value: _vm.comment.name },
+            on: {
+              input: function ($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.$set(_vm.comment, "name", $event.target.value)
+              },
+            },
+          }),
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "mb-3" }, [
           _c("textarea", {
@@ -29113,7 +29100,6 @@ var render = function () {
             attrs: {
               name: "body",
               placeholder: "What is your view ...",
-              id: "exampleFormControlTextarea1",
               rows: "3",
             },
             domProps: { value: _vm.comment.body },
@@ -29128,28 +29114,12 @@ var render = function () {
           }),
         ]),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(0),
       ]
     ),
   ])
 }
 var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "mb-3" }, [
-      _c("input", {
-        staticClass: "form-control",
-        attrs: {
-          name: "title",
-          type: "email",
-          id: "exampleFormControlInput1",
-          placeholder: "Name",
-        },
-      }),
-    ])
-  },
   function () {
     var _vm = this
     var _h = _vm.$createElement
@@ -29200,9 +29170,7 @@ var render = function () {
       _vm._v(" "),
       _c("h3", [_vm._v("Comments")]),
       _vm._v(" "),
-      _c("comment-card", {
-        attrs: { comments: _vm.comments, replies: _vm.replies },
-      }),
+      _c("comment-card", { attrs: { comments: _vm.comments } }),
     ],
     1
   )
@@ -29233,11 +29201,49 @@ var render = function () {
   return _c(
     "div",
     { staticClass: "container" },
-    [_c("h1", [_vm._v("Blog Post Title!")]), _vm._v(" "), _c("Comments")],
+    [
+      _c("h1", [_vm._v("Blog Post Title!")]),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi\n        facere vero culpa error temporibus delectus quae earum obcaecati,\n        facilis cum cumque magnam, odio reiciendis atque repellat\n        recusandae! Fuga, dolores veritatis! Laboriosam qui recusandae animi\n        obcaecati delectus libero. Veniam necessitatibus explicabo placeat\n        voluptates. Praesentium cumque enim totam labore quod? Recusandae ut\n        est provident, adipisci totam suscipit sit nesciunt natus laboriosam\n        animi.\n    "
+        ),
+      ]),
+      _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c("p", [
+        _vm._v(
+          "\n        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Reiciendis\n        rem accusamus necessitatibus eligendi, aliquam odio. Modi deleniti\n        aliquam a recusandae velit, repudiandae veniam soluta. Accusamus\n        unde mollitia incidunt corporis illo!\n    "
+        ),
+      ]),
+      _vm._v(" "),
+      _c("Comments"),
+    ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("figure", [
+      _c("blockquote", { staticClass: "blockquote" }, [
+        _c("p", [
+          _vm._v("A well-known quote, contained in a blockquote element."),
+        ]),
+      ]),
+      _vm._v(" "),
+      _c("figcaption", { staticClass: "blockquote-footer" }, [
+        _vm._v("\n            Someone famous in "),
+        _c("cite", { attrs: { title: "Source Title" } }, [
+          _vm._v("Source Title"),
+        ]),
+      ]),
+    ])
+  },
+]
 render._withStripped = true
 
 
